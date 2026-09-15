@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FIFA 22 Player Rating Predictor</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f2f4f7;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #111827;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin-bottom: 8px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input {
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            display: none;
+            background: #ecfdf5;
+        }
+
+        #result h2 {
+            color: #047857;
+        }
+
+        #rating {
+            font-size: 40px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #error {
+            margin-top: 20px;
+            color: #dc2626;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>FIFA 22 Player Rating Predictor</h1>
+        <p>Machine Learning Based Overall Rating Prediction</p>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Enter Player Details</h2>
+
+            <p class="description">
+                Enter the player's attributes below to predict the FIFA 22 Overall Rating.
+            </p>
+
+            <form id="predictionForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" id="age" value="25" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Height (cm)</label>
+                        <input type="number" id="height_cm" value="180" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Weight (kg)</label>
+                        <input type="number" id="weight_kg" value="75" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pace</label>
+                        <input type="number" id="pace" value="75" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Shooting</label>
+                        <input type="number" id="shooting" value="70" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Passing</label>
+                        <input type="number" id="passing" value="72" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dribbling</label>
+                        <input type="number" id="dribbling" value="74" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Defending</label>
+                        <input type="number" id="defending" value="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Physic</label>
+                        <input type="number" id="physic" value="70" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Attacking Crossing</label>
+                        <input type="number" id="attacking_crossing" value="60" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Attacking Finishing</label>
+                        <input type="number" id="attacking_finishing" value="65" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skill Dribbling</label>
+                        <input type="number" id="skill_dribbling" value="70" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skill Ball Control</label>
+                        <input type="number" id="skill_ball_control" value="75" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Power Shot Power</label>
+                        <input type="number" id="power_shot_power" value="70" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Power Stamina</label>
+                        <input type="number" id="power_stamina" value="75" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Power Strength</label>
+                        <input type="number" id="power_strength" value="65" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mentality Aggression</label>
+                        <input type="number" id="mentality_aggression" value="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mentality Interceptions</label>
+                        <input type="number" id="mentality_interceptions" value="30" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mentality Positioning</label>
+                        <input type="number" id="mentality_positioning" value="60" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mentality Vision</label>
+                        <input type="number" id="mentality_vision" value="65" required>
+                    </div>
+
+                </div>
+
+                <button type="submit">
+                    Predict Overall Rating
+                </button>
+
+            </form>
+
+            <div id="result">
+                <h2>Predicted FIFA Overall Rating</h2>
+                <div id="rating">--</div>
+            </div>
+
+            <div id="error"></div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById("predictionForm").addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            document.getElementById("error").textContent = "";
+
+            const player = {
+                age: Number(document.getElementById("age").value),
+                height_cm: Number(document.getElementById("height_cm").value),
+                weight_kg: Number(document.getElementById("weight_kg").value),
+                pace: Number(document.getElementById("pace").value),
+                shooting: Number(document.getElementById("shooting").value),
+                passing: Number(document.getElementById("passing").value),
+                dribbling: Number(document.getElementById("dribbling").value),
+                defending: Number(document.getElementById("defending").value),
+                physic: Number(document.getElementById("physic").value),
+                attacking_crossing: Number(document.getElementById("attacking_crossing").value),
+                attacking_finishing: Number(document.getElementById("attacking_finishing").value),
+                skill_dribbling: Number(document.getElementById("skill_dribbling").value),
+                skill_ball_control: Number(document.getElementById("skill_ball_control").value),
+                power_shot_power: Number(document.getElementById("power_shot_power").value),
+                power_stamina: Number(document.getElementById("power_stamina").value),
+                power_strength: Number(document.getElementById("power_strength").value),
+                mentality_aggression: Number(document.getElementById("mentality_aggression").value),
+                mentality_interceptions: Number(document.getElementById("mentality_interceptions").value),
+                mentality_positioning: Number(document.getElementById("mentality_positioning").value),
+                mentality_vision: Number(document.getElementById("mentality_vision").value)
+            };
+
+            try {
+
+                const response = await fetch("http://127.0.0.1:5000/predict", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(player)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Prediction failed.");
+                }
+
+                document.getElementById("result").style.display = "block";
+
+                document.getElementById("rating").textContent =
+                    data.predicted_overall;
+
+            } catch (error) {
+
+                document.getElementById("error").textContent =
+                    "Error: " + error.message;
+
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
