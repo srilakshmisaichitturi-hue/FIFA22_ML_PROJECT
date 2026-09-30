@@ -1,0 +1,28 @@
+{
+    "dataset_name": "FIFA 22 Players",
+    "raw_record_count": 19239,
+    "processed_record_count": 17107,
+    "features": [
+        "age",
+        "height_cm",
+        "weight_kg",
+        "pace",
+        "shooting",
+        "passing",
+        "dribbling",
+        "defending",
+        "physic",
+        "attacking_crossing",
+        "attacking_finishing",
+        "skill_dribbling",
+        "skill_ball_control",
+        "power_shot_power",
+        "power_stamina",
+        "power_strength",
+        "mentality_aggression",
+        "mentality_interceptions",
+        "mentality_positioning",
+        "mentality_vision"
+    ],
+    "target": "overall"
+}
