@@ -1,0 +1,36 @@
+{
+    "overall_drift_detected": true,
+    "features_drifted_count": 2,
+    "feature_metrics": {
+        "pace": {
+            "ks_statistic": 0.5813,
+            "p_value": 0.0,
+            "drift_detected": true
+        },
+        "shooting": {
+            "ks_statistic": 0.3327,
+            "p_value": 0.0,
+            "drift_detected": true
+        },
+        "passing": {
+            "ks_statistic": 0.0,
+            "p_value": 1.0,
+            "drift_detected": false
+        },
+        "dribbling": {
+            "ks_statistic": 0.0,
+            "p_value": 1.0,
+            "drift_detected": false
+        },
+        "defending": {
+            "ks_statistic": 0.0,
+            "p_value": 1.0,
+            "drift_detected": false
+        },
+        "physic": {
+            "ks_statistic": 0.0,
+            "p_value": 1.0,
+            "drift_detected": false
+        }
+    }
+}
